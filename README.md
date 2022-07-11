@@ -1,3 +1,13 @@
+# NOTES
+- Must ensure expo-cli is up to date.
+- React/React Dom should be V17, newer and older will probably break.
+## For Components
+- Using https://github.com/fulcrologic/fulcro-native/blob/develop/src/main/com/fulcrologic/fulcro_native/alpha/components.cljc
+## For Client App
+- Using https://github.com/SignSpice/fulcro-real-world/blob/master/src/main/app/fulcro_native_expo_substitute.cljc
+- Webpack removed for my purposes, but https://github.com/PEZ/rn-rf-shadow setup works.
+
+
 # React Native using shadow-cljs in 3 minutes
 
 The fastest way a [ClojureScript](https://clojurescript.org/) coder can get started with React Native development. *Prove me wrong.*

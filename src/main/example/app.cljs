@@ -12,7 +12,7 @@
 (defonce FULCRO-APP (expo-app/fulcro-app {}))
 
 (defsc Root [this props] {}
-  (ui-view {} (ui-text {} "WHAT")
+  (ui-view {} (ui-text {} "HELLO WORLD!")
            (ui-image {:style {:width  160
                                              :height 160}
                                      :source cljs-splash})))
