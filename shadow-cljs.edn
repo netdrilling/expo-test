@@ -12,4 +12,5 @@
                       :output-dir       "app"
                       :compiler-options {:infer-externs :auto}
                       :devtools         {:autoload true
+                                         :after-load example.app/refresh
                                          :preloads [shadow.expo.keep-awake]}}}}
