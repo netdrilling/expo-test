@@ -6,12 +6,16 @@
             ["expo-status-bar" :refer [StatusBar]]
             [re-frame.core :as rf]
             ["react-native" :as rn]
-            [reagent.core :as r]))
+            [reagent.core :as r]
+            [com.fulcrologic.fulcro.application :as app]
+            [example.fulcro-app :as expo-app]
+            [com.fulcrologic.fulcro-native.alpha.components :refer [react-factory ui-text ui-view]]
+            [com.fulcrologic.fulcro.components :as comp :refer [defsc]]))
 
 (def shadow-splash (js/require "../assets/shadow-cljs.png"))
 (def cljs-splash (js/require "../assets/cljs.png"))
 
-(defn root []
+(defn old-root []
   (let [counter @(rf/subscribe [:get-counter])
         tap-enabled? @(rf/subscribe [:counter-tappable?])]
     [:> rn/View {:style {:flex 1
@@ -44,11 +48,28 @@
        "Using: shadow-cljs+expo+reagent+re-frame"]]
      [:> StatusBar {:style "auto"}]]))
 
-(defn start
+(defn old-start
   {:dev/after-load true}
   []
-  (expo-root/render-root (r/as-element [root])))
+  (expo-root/render-root (r/as-element [old-root])))
 
-(defn init []
+(defn old-init []
   (rf/dispatch-sync [:initialize-db])
-  (start))
+  (old-start))
+
+(defonce FULCRO-APP (expo-app/fulcro-app {}))
+
+(defsc Root [this props] {}
+  (ui-view {} (ui-text {} "WHAT")))
+
+(def ui-root (comp/factory Root))
+
+(defn ^:export init
+  "Shadow-cljs sets this up to be our entry-point function. See shadow-cljs.edn `:init-fn` in the modules of the main build."
+  []
+  (app/mount! FULCRO-APP Root :nada))
+
+(defn ^:export refresh
+  "During development, shadow-cljs will call this on every hot reload of source. See shadow-cljs.edn"
+  []
+  (app/mount! FULCRO-APP Root :nada))
